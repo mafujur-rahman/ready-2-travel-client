@@ -6,12 +6,20 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Root from './Root/Root';
+import LogIn from './layouts/LogIn/LogIn';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    children: [
+      {
+        path:"/log-in",
+        element: <LogIn></LogIn>
+      }
+    ]
   },
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
