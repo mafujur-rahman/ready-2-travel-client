@@ -33,7 +33,7 @@ const Navbar = () => {
                             };
                         }}
                     ><li><a>All Tourists Spot</a></li></NavLink>
-                    <NavLink to="/contact"
+                    <NavLink to="/add-tourist-spot"
                         style={({ isActive }) => {
                             return {
                                 backgroundColor: isActive ? "#113065" : "",
@@ -83,7 +83,7 @@ const Navbar = () => {
                             };
                         }}
                     ><li><a>All Tourists Spot</a></li></NavLink>
-                    <NavLink to="/contact"
+                    <NavLink to="/add-tourist-spot"
                         style={({ isActive }) => {
                             return {
                                 backgroundColor: isActive ? "#113065" : "",
