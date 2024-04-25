@@ -1,25 +1,36 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { BsGithub, BsGoogle } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 
-const LogIn = () => {
+const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
-    
+
     return (
         <div>
             <div className="hero  min-h-screen bg-blue-200">
-                <div className="hero-content flex-col animate__animated animate__backInDown">
-                    <h3 className="text-4xl font-bold text-blue-500 mb-2">Login Now</h3>
+                <div className="hero-content flex-col animate__animated animate__backInUp">
+                    <h3 className="text-4xl font-bold text-blue-500 mb-2">Register Now</h3>
                     <div className="card shrink-0 w-full md:w-[400px]  shadow-2xl bg-blue-100">
-                        <form className="card-body">
+                        <form  className="card-body">
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Full Name</span>
+                                </label>
+                                <input type="text" placeholder="Enter your full name" name="name" className="input input-bordered" required />
+                            </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" placeholder="email" className="input input-bordered" name="email" required />
+                                <input type="email" placeholder="Enter your email" name="email" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Photo URL</span>
+                                </label>
+                                <input type="text" placeholder="Enter your photo url" name="url" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -35,17 +46,10 @@ const LogIn = () => {
                                 </div>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn bg-[#113065] text-white">Login</button>
+                                <button className="btn bg-blue-950 text-white">Register</button>
                             </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text text-center">Or</span>
-                                </label>
-                                <button  className="btn bg-orange-600 text-white"> <BsGoogle /> Sign in with Google </button>
-                                <button  className="btn bg-black text-white"> <BsGithub /> Sign in with Github </button>
-                            </div>
-                            <p className="text-center">Do not have an account?</p>
-                            <Link to="/register"><p className="text-xl font-medium text-[#113065] underline text-center">Register</p></Link>
+                            <p className="text-center">Already have an account?</p>
+                            <Link to="/log-in"><p className="text-xl font-medium text-blue-950 underline text-center">Log in</p></Link>
                         </form>
                     </div>
                 </div>
@@ -55,4 +59,4 @@ const LogIn = () => {
     );
 };
 
-export default LogIn;
+export default Register;
