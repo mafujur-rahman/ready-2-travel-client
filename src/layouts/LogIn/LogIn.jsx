@@ -1,12 +1,35 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { BsGithub, BsGoogle } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { Link, Navigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from "../../Context/AuthProvider";
 
 
 const LogIn = () => {
-    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
+    const {signIn} = useContext(AuthContext)
+
+    const handleLogIn = (e)=>{
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signIn(email, password)
+            .then(result => {
+                console.log(result)
+                toast.success('Successfully logged in');
+                setTimeout(() => {
+                    Navigate(location?.state ? location.state : "/")
+                }, 2000);
+            })
+            .catch(error => {
+                console.error(error)
+                toast.warning("User not found")
+            })
+        
+    }
     
     return (
         <div>
@@ -14,7 +37,7 @@ const LogIn = () => {
                 <div className="hero-content flex-col animate__animated animate__backInDown">
                     <h3 className="text-4xl font-bold text-blue-500 mb-2">Login Now</h3>
                     <div className="card shrink-0 w-full md:w-[400px]  shadow-2xl bg-blue-100">
-                        <form className="card-body">
+                        <form onSubmit={handleLogIn} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>

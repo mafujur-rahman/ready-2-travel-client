@@ -3,7 +3,7 @@
 const Banner = () => {
     return (
         <div className="absolute">
-            <div className="carousel w-full h-[300px] md:h-[500px] lg:h-[700px]">
+            <div className="carousel w-full h-[300px] md:h-[500px] lg:h-[750px]">
                 <div id="slide1" className="carousel-item relative w-full">
                     <img src="/deadsea.jpg" className="w-full" />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
