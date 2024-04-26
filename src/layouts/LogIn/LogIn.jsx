@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { BsGithub, BsGoogle } from "react-icons/bs";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../../Context/AuthProvider";
@@ -9,7 +9,8 @@ import { AuthContext } from "../../Context/AuthProvider";
 
 const LogIn = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const {signIn} = useContext(AuthContext)
+    const {signIn} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleLogIn = (e)=>{
         e.preventDefault();
@@ -21,7 +22,7 @@ const LogIn = () => {
                 console.log(result)
                 toast.success('Successfully logged in');
                 setTimeout(() => {
-                    Navigate(location?.state ? location.state : "/")
+                    navigate(location?.state ? location.state : "/")
                 }, 2000);
             })
             .catch(error => {
