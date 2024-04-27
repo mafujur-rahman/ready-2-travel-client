@@ -13,11 +13,14 @@ import Home from './Home/Home';
 import AuthProvider from './Context/AuthProvider';
 import AllTouristSpot from './layouts/AllTouristSpot/AllTouristSpot';
 import ViewDetails from './layouts/ViewDetails/ViewDetails';
+import PrivateRoute from './Route/PrivateRoute';
+import Error from './layouts/Error/Error';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement:<Error></Error>,
     children: [
       {
         path: "/",
@@ -34,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-tourist-spot",
-        element: <AddTouristSpot></AddTouristSpot>
+        element: <PrivateRoute><AddTouristSpot></AddTouristSpot></PrivateRoute>
       },
       {
         path:'/all-tourist-spot',
@@ -43,7 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/view-details/:id',
-        element:<ViewDetails></ViewDetails>,
+        element:<PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/spot/${params.id}`)
       }
     ]
