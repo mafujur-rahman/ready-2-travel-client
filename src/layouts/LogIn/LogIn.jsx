@@ -1,16 +1,37 @@
 import { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { BsGithub, BsGoogle } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../../Context/AuthProvider";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+
 
 
 const LogIn = () => {
     const [showPassword, setShowPassword] = useState(false);
     const {signIn} = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+
+
+
+    const handleGoogleLogIn = async () => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            console.log(result);
+            toast.success('Successfully logged in');
+            setTimeout(() => {
+                navigate(location?.state? location.state : "/");
+            }, 2000);
+        } catch (error) {
+            console.error(error);
+            toast.error('Failed to log in with Google');
+        }
+    }
 
     const handleLogIn = (e)=>{
         e.preventDefault();
@@ -29,8 +50,9 @@ const LogIn = () => {
                 console.error(error)
                 toast.warning("User not found")
             })
-        
     }
+
+    
     
     return (
         <div>
@@ -65,7 +87,7 @@ const LogIn = () => {
                                 <label className="label">
                                     <span className="label-text text-center">Or</span>
                                 </label>
-                                <button  className="btn bg-orange-600 text-white"> <BsGoogle /> Sign in with Google </button>
+                                <button onClick={handleGoogleLogIn} className="btn bg-orange-600 text-white"> <BsGoogle /> Sign in with Google </button>
                                 <button  className="btn bg-black text-white"> <BsGithub /> Sign in with Github </button>
                             </div>
                             <p className="text-center">Do not have an account?</p>
