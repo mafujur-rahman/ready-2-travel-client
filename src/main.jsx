@@ -11,6 +11,8 @@ import Register from './layouts/Register/Register';
 import AddTouristSpot from './layouts/AddTouristSpot/AddTouristSpot';
 import Home from './Home/Home';
 import AuthProvider from './Context/AuthProvider';
+import AllTouristSpot from './layouts/AllTouristSpot/AllTouristSpot';
+import ViewDetails from './layouts/ViewDetails/ViewDetails';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,16 @@ const router = createBrowserRouter([
       {
         path: "/add-tourist-spot",
         element: <AddTouristSpot></AddTouristSpot>
+      },
+      {
+        path:'/all-tourist-spot',
+        element:<AllTouristSpot></AllTouristSpot>,
+        loader: () => fetch('http://localhost:5000/spot')
+      },
+      {
+        path:'/view-details/:id',
+        element:<ViewDetails></ViewDetails>,
+        loader: ({params}) => fetch(`http://localhost:5000/spot/${params.id}`)
       }
     ]
   },
