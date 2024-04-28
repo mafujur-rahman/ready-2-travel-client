@@ -1,7 +1,7 @@
 
 const Holidays = () => {
     return (
-        <div className="bg-[#113065] mb-16 ">
+        <div className="bg-[#113065] mb-2 ">
             <div className="lg:flex gap-16 md:gap-0 mx-auto container justify-around">
                 {/* left side */}
                 <div className=" mt-10 p-10">

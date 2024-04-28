@@ -5,7 +5,7 @@ const SingleCountry = ({ country }) => {
     const { _id, img, countryName, description } = country;
     return (
         <NavLink to={`/country-spot/${_id}`}>
-            <div className="card w-96 bg-base-100 shadow-xl mt-16 text-[#113065]">
+            <div className="card w-96 bg-[#113065] border-2 border-gray-300 mt-16 text-white">
             <figure className="px-10 pt-10">
                 <img src={img} alt="Shoes" className="rounded-xl" />
             </figure>
