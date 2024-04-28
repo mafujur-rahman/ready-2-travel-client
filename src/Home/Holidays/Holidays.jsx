@@ -2,7 +2,7 @@
 const Holidays = () => {
     return (
         <div className="bg-[#113065] mb-16 ">
-            <div className="flex gap-16 mx-auto container justify-around">
+            <div className="lg:flex gap-16 md:gap-0 mx-auto container justify-around">
                 {/* left side */}
                 <div className=" mt-10 p-10">
                     <h2 className="text-3xl font-bold text-white">Holidays in Tours: things to know</h2>
@@ -27,9 +27,9 @@ const Holidays = () => {
                 </div>
                 {/* right side */}
                 <div className="grid grid-cols-2 p-10">
-                    <img className="h-[200px] w-[200px]" src="/public/deadsea.jpg" alt="" />
-                    <img className="h-[200px] w-[200px]" src="/public/doha.jpg" alt="" />
-                    <img className="col-span-2 w-[400px] h-[200px]" src="/public/fujairah.jpg" alt="" />
+                    <img className="h-[200px] w-[200px] md:h-[300px] md:w-[350px] lg:h-[200px]  lg:w-[200px]" src="/deadsea.jpg" alt="" />
+                    <img className="h-[200px] w-[200px] md:h-[300px] md:w-[350px] lg:h-[200px]  lg:w-[200px]" src="/doha.jpg" alt="" />
+                    <img className="col-span-2 md:h-[300px] w-[400px] md:w-[700px] lg:w-[400px] lg:h-[200px]" src="/fujairah.jpg" alt="" />
                 </div>
             </div>
         </div>
