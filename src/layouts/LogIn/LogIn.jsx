@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../../Context/AuthProvider";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
 
 
@@ -16,6 +16,7 @@ const LogIn = () => {
     const location = useLocation();
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
+    const ghProvider = new GithubAuthProvider();
 
 
 
@@ -31,6 +32,20 @@ const LogIn = () => {
             console.error(error);
             toast.error('Failed to log in with Google');
         }
+    }
+
+    const handleGithubLogIn = () => {
+        signInWithPopup(auth, ghProvider)
+            .then(result => {
+                console.log(result)
+                toast.success('Successfully logged in');
+                setTimeout(() => {
+                    navigate(location?.state ? location.state : "/")
+                }, 2000);
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
     const handleLogIn = (e)=>{
@@ -88,7 +103,7 @@ const LogIn = () => {
                                     <span className="label-text text-center">Or</span>
                                 </label>
                                 <button onClick={handleGoogleLogIn} className="btn bg-orange-600 text-white"> <BsGoogle /> Sign in with Google </button>
-                                <button  className="btn bg-black text-white"> <BsGithub /> Sign in with Github </button>
+                                <button onClick={handleGithubLogIn} className="btn bg-black text-white"> <BsGithub /> Sign in with Github </button>
                             </div>
                             <p className="text-center">Do not have an account?</p>
                             <Link to="/register"><p className="text-xl font-medium text-[#113065] underline text-center">Register</p></Link>

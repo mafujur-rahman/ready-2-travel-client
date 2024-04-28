@@ -15,6 +15,7 @@ import AllTouristSpot from './layouts/AllTouristSpot/AllTouristSpot';
 import ViewDetails from './layouts/ViewDetails/ViewDetails';
 import PrivateRoute from './Route/PrivateRoute';
 import Error from './layouts/Error/Error';
+import ListPage from './layouts/ListPage/ListPage';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
         path:'/view-details/:id',
         element:<PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/spot/${params.id}`)
+      },
+      {
+        path:'/list-page',
+        element:<PrivateRoute><ListPage></ListPage></PrivateRoute>
       }
     ]
   },

@@ -53,7 +53,7 @@ const Navbar = () => {
                             };
                         }}
                     ><li><a> Add Tourists Spot</a></li></NavLink>
-                    <NavLink to="/contact"
+                    <NavLink to="/list-page"
                         style={({ isActive }) => {
                             return {
                                 backgroundColor: isActive ? "#113065" : "",
@@ -103,7 +103,7 @@ const Navbar = () => {
                             };
                         }}
                     ><li><a> Add Tourists Spot</a></li></NavLink>
-                    <NavLink to="/contact"
+                    <NavLink to="/list-page"
                         style={({ isActive }) => {
                             return {
                                 backgroundColor: isActive ? "#113065" : "",

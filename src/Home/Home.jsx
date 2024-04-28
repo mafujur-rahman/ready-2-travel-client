@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import Banner from "../Banner/Banner";
 import Spots from "./Spots/Spots";
+import PerfectTrip from "./PerfectTrip/PerfectTrip";
+import Holidays from "./Holidays/Holidays";
 
 
 const Home = () => {
@@ -17,6 +19,8 @@ const Home = () => {
                 }
                 </div>
             </div>
+            <PerfectTrip></PerfectTrip>
+            <Holidays></Holidays>
         </>
     );
 };
