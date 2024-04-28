@@ -6,7 +6,7 @@ const ViewDetails = () => {
     const spot = useLoaderData();
     const { img, spotName, countryName, location, description, cost, seasonality, travelTime, visitor } = spot || {};
     return (
-        <div className="mx-auto container rounded-2xl mt-10 lg:border-2 lg:border-gray-300">
+        <div className="mx-auto container rounded-2xl mt-10 lg:border-2 lg:border-gray-300 mb-16">
             <div className="hero ">
                 <div className="hero-content flex-col lg:flex-row gap-20">
                     <img src={img} className="max-w-sm h-auto rounded-lg " />

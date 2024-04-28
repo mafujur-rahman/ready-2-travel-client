@@ -16,6 +16,8 @@ import ViewDetails from './layouts/ViewDetails/ViewDetails';
 import PrivateRoute from './Route/PrivateRoute';
 import Error from './layouts/Error/Error';
 import ListPage from './layouts/ListPage/ListPage';
+import CountrySpot from './layouts/CountrySpot/CountrySpot';
+
 
 const router = createBrowserRouter([
   {
@@ -26,7 +28,8 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/spot')
+        loader: () => fetch('http://localhost:5000/spot'),
+        
       },
       {
         path: "/log-in",
@@ -51,9 +54,14 @@ const router = createBrowserRouter([
         loader: ({params}) => fetch(`http://localhost:5000/spot/${params.id}`)
       },
       {
+        path:'/country-spot/:id',
+        element:<CountrySpot></CountrySpot>,
+        loader: ({params}) => fetch(`http://localhost:5000/spot/${params.id}`)
+      },
+      {
         path:'/list-page',
         element:<PrivateRoute><ListPage></ListPage></PrivateRoute>
-      }
+      },
     ]
   },
 
