@@ -1,14 +1,14 @@
-import Swal from 'sweetalert2'
-import { useContext } from "react";
-import { AuthContext } from "../../Context/AuthProvider";
-import { Typewriter } from 'react-simple-typewriter';
+import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
-const AddTouristSpot = () => {
 
-    const { user } = useContext(AuthContext);
+const UpdateSpot = () => {
 
-    const handleAddSpot = e => {
+    const spot = useLoaderData();
+    const { _id, img, spotName, countryName, location, description, cost, seasonality, travelTime, visitor } = spot || {};
+
+    const handleUpdateSpot = e => {
         e.preventDefault();
         const form = e.target;
         const img = form.photo.value;
@@ -20,53 +20,42 @@ const AddTouristSpot = () => {
         const seasonality = form.seasonality.value;
         const travelTime = form.travelTime.value;
         const visitor = form.visitor.value;
-        const email = form.email.value;
-        const name = form.name.value;
-        const newSpot = { img, spotName, countryName, location, description, cost, seasonality, travelTime, visitor, email, name }
-        console.log(newSpot);
+        const updatedSpot = { img, spotName, countryName, location, description, cost, seasonality, travelTime, visitor}
+
         // send to the server
-        fetch('https://ready-2-travel-server.vercel.app/spot', {
-            method: 'POST',
+        fetch(`https://ready-2-travel-server.vercel.app/spot/${_id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newSpot)
+            body: JSON.stringify(updatedSpot)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if (data.insertedId) {
+                if(data.modifiedCount > 0){
                     Swal.fire({
                         icon: "success",
-                        title: "Added a new spot",
+                        title: "Update the spot",
                         showConfirmButton: false,
                         timer: 1500
-                    });
+                      });
                 }
             })
-
+        
     }
-
     return (
         <div>
-
             <div className="hero  min-h-screen bg-blue-200">
                 <div className="hero-content flex-col animate__animated animate__backInUp">
-                    <h3 className="text-4xl font-bold text-blue-500 mb-2">Add Tourist Spot </h3>
-                    <Typewriter
-                        words={['Add spot information']}
-                        loop={5}
-                        typeSpeed={70}
-                        deleteSpeed={50}
-                        delaySpeed={1000}
-                    />
+                    <h3 className="text-4xl font-bold text-blue-500 mb-2">Update Spot</h3>
                     <div className="card shrink-0 w-full  shadow-2xl bg-blue-100">
-                        <form onSubmit={handleAddSpot} className="card-body">
+                        <form onSubmit={ handleUpdateSpot } className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Image URL</span>
                                 </label>
-                                <input type="text" placeholder="Enter image url" name="photo" className="input input-bordered" required />
+                                <input type="text" defaultValue={img} name="photo" className="input input-bordered" required />
                             </div>
                             {/* /// */}
                             <div className="md:flex md:gap-5">
@@ -74,13 +63,13 @@ const AddTouristSpot = () => {
                                     <label className="label">
                                         <span className="label-text">Tourist Spot Name</span>
                                     </label>
-                                    <input type="text" placeholder="Enter spot name" name="spotName" className="input input-bordered" required />
+                                    <input type="text" defaultValue={spotName} name="spotName" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Country Name</span>
                                     </label>
-                                    <input type="text" placeholder="Enter country name" name="countryName" className="input input-bordered" required />
+                                    <input type="text" defaultValue={countryName} name="countryName" className="input input-bordered" required />
                                 </div>
                             </div>
                             <div className="md:flex md:gap-5">
@@ -88,13 +77,13 @@ const AddTouristSpot = () => {
                                     <label className="label">
                                         <span className="label-text">Location</span>
                                     </label>
-                                    <input type="text" placeholder="Enter spot location" name="location" className="input input-bordered" required />
+                                    <input type="text" defaultValue={location} name="location" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Short Description</span>
                                     </label>
-                                    <input type="text" placeholder="description" name="description" className="input input-bordered" required />
+                                    <input type="text" defaultValue={description} name="description" className="input input-bordered" required />
                                 </div>
                             </div>
                             <div className="md:flex md:gap-5">
@@ -102,13 +91,13 @@ const AddTouristSpot = () => {
                                     <label className="label">
                                         <span className="label-text">Average Cost</span>
                                     </label>
-                                    <input type="text" placeholder="Average cost" name="cost" className="input input-bordered" required />
+                                    <input type="text" defaultValue={cost} name="cost" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Seasonality</span>
                                     </label>
-                                    <input type="text" placeholder="Summer/Winter" name="seasonality" className="input input-bordered" required />
+                                    <input type="text" defaultValue={seasonality} name="seasonality" className="input input-bordered" required />
                                 </div>
                             </div>
                             <div className="md:flex md:gap-5">
@@ -116,30 +105,17 @@ const AddTouristSpot = () => {
                                     <label className="label">
                                         <span className="label-text">Travel Time</span>
                                     </label>
-                                    <input type="text" placeholder="travel time" name="travelTime" className="input input-bordered" required />
+                                    <input type="text" defaultValue={travelTime} name="travelTime" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Total Visitors Per Year</span>
                                     </label>
-                                    <input type="text" placeholder="total visitor" name="visitor" className="input input-bordered" required />
+                                    <input type="text" defaultValue={visitor} name="visitor" className="input input-bordered" required />
                                 </div>
                             </div>
                             <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">User Email</span>
-                                </label>
-                                <input type="email" placeholder="Enter your email" name="email" className="input input-bordered" defaultValue={user.email} required />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">User Name</span>
-                                </label>
-                                <input type="text" placeholder="Enter your full name" name="name" className="input input-bordered" defaultValue={user.displayName} required />
-                            </div>
-
-                            <div className="form-control">
-                                <button className="btn bg-blue-950 text-white">Add</button>
+                                <button className="btn bg-blue-950 text-white">Update</button>
                             </div>
                         </form>
                     </div>
@@ -149,4 +125,4 @@ const AddTouristSpot = () => {
     );
 };
 
-export default AddTouristSpot;
+export default UpdateSpot;

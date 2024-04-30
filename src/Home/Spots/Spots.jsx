@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+
 const Spots = ({ spot }) => {
     const {_id, img, spotName, countryName, location, description, cost, visitor } = spot;
     return (

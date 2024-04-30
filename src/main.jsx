@@ -17,6 +17,7 @@ import PrivateRoute from './Route/PrivateRoute';
 import Error from './layouts/Error/Error';
 import ListPage from './layouts/ListPage/ListPage';
 import CountrySpot from './layouts/CountrySpot/CountrySpot';
+import UpdateSpot from './layouts/UpdateSpot/UpdateSpot';
 
 
 const router = createBrowserRouter([
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/spot'),
+        loader: () => fetch('https://ready-2-travel-server.vercel.app/spot'),
         
       },
       {
@@ -46,22 +47,27 @@ const router = createBrowserRouter([
       {
         path:'/all-tourist-spot',
         element:<AllTouristSpot></AllTouristSpot>,
-        loader: () => fetch('http://localhost:5000/spot')
+        loader: () => fetch('https://ready-2-travel-server.vercel.app/spot')
       },
       {
         path:'/view-details/:id',
         element:<PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/spot/${params.id}`)
+        loader: ({params}) => fetch(`https://ready-2-travel-server.vercel.app/spot/${params.id}`)
       },
       {
         path:'/country-spot/:id',
         element:<CountrySpot></CountrySpot>,
-        loader: ({params}) => fetch(`http://localhost:5000/spot/${params.id}`)
+        loader: ({params}) => fetch(`https://ready-2-travel-server.vercel.app/spot/${params.id}`)
       },
       {
         path:'/list-page',
         element:<PrivateRoute><ListPage></ListPage></PrivateRoute>,
-        loader: () => fetch(`http://localhost:5000/spot`)
+        loader: () => fetch(`https://ready-2-travel-server.vercel.app/spot`)
+      },
+      {
+        path:'/update/:id',
+        element:<PrivateRoute><UpdateSpot></UpdateSpot></PrivateRoute>,
+        loader: ({params}) => fetch(`https://ready-2-travel-server.vercel.app/spot/${params.id}`)
       },
     ]
   },

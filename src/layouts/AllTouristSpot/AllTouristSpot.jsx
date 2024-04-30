@@ -30,10 +30,7 @@ const AllTouristSpot = () => {
         <summary className="m-1 btn bg-[#113065] text-white">Sort</summary>
         <ul className="p-2 shadow menu dropdown-content z-[1] bg-[#113065] text-white rounded-box w-52">
           <li>
-            <a onClick={handleSort}>by cost (ascending)</a>
-          </li>
-          <li>
-            <a onClick={() => setSortDirection('desc')}>by cost (descending)</a>
+            <a onClick={handleSort}>by cost</a>
           </li>
         </ul>
       </details>
